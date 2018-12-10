@@ -46,7 +46,7 @@ public class SimpleRecyclerViewAdapter extends RecyclerView.Adapter<SimpleRecycl
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private View view;
 

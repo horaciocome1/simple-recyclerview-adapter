@@ -105,3 +105,7 @@ Please reference to the part on the start where i talked about support libraries
 I am open to suggestions of any kind.
 Please be expressive, so others so we'all will be able to understand each other!
 Report any issues, please!
+
+# Simple RecyclerView Utils
+This is part of a serie of libraries that pretend to make recyclerview usage more easy.
+For a touch listener please see [Simple RecyclerView Touch Listener](https://github.com/horaciocome1/simple-recyclerview-touch-listener)

@@ -71,7 +71,8 @@ SimpleRecyclerViewAdapter<DataType> adapter = new SimpleRecyclerViewAdapter<>();
         recyclerView.setAdapter(adapter);
 ```
 
-As you can see, casting is mandatory. Remember that this is a general porpose Adapter, althougth it is returning your own object, the class itself dont know it.
+No casting need.
+_I suggest you to use Android Studio code completion, to implement **onBindViewHolder()**._
 
 ### Troubleshooting
 Naturally, the adapter needs an **item_layout**, an **list** and an **onBindViewHolder()** implementation to display the list on screen.

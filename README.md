@@ -23,7 +23,7 @@ The next task is to add the dependecy to your _app_ `build.gradle` file.
 ```gradle
 	dependencies {
           ...
-	        implementation 'com.github.horaciocome1:simple-recyclerview-adapter:0.1.0'
+	        implementation 'com.github.horaciocome1:simple-recyclerview-adapter:0.1.2'
 	}
 ```
 Now you ready to go. Except that you should _**sync your project**_ first.
@@ -33,58 +33,56 @@ As mention on IO18, android support libraries will not be updated anymore, thats
 I am wondering if it is necessary to do a separate lib for suppor appcompat. Email me if you thinking on that.
 
 ## How to use
-Intanciate a class `SimpleRecyclerViewAdapter` by using its own builder.
-```java
-SimpleRecyclerViewAdapter adapter = new SimpleRecyclerViewAdapter.Builder()
-        .setItemLayout(R.layout.your_item_layout)
-        .setList(yourList)
-        .setOnBindViewHolder(new SimpleRecyclerViewAdapter.OnBindViewHolder() {
-            @Override
-            public void onBind(@NonNull SimpleRecyclerViewAdapter.ViewHolder holder, Object object) {
-                // bind object data to the view
-            }
-        })
-        .build();
-recyclerView.setAdapter(adapter);
+Call the default constructor passing as Datatype the class of your list objects.
+```kotlin
+recyclerView.adapter = SimpleRecyclerViewAdapter<DataType>().apply {
+    itemLayout = R.layout.your_item_layout
+    list = yourList
+    setOnBindViewHolder { holder, dataType -> /* bind data here */ }
+}
 ```
 ### Examples
 Lets have a look at some common binding examples 
-```java
-@Override
-public void onBind(@NonNull SimpleRecyclerViewAdapter.ViewHolder holder, Object object) {
-    // binding a string to a textview
-    ((TextView) holder.getViewById(R.id.your_item_layout_textview_id)).setText((String) object)
-
-    // binding and image to an imageview using Picasso or Glide
-    Picasso.with(context)
-            .load(((Person) object).getProfilePic())
-            .into((ImageView) holder.getViewById(R.id.your_item_layout_imageview_id))
+```kotlin
+recyclerView.adapter = SimpleRecyclerViewAdapter<User>().apply {
+    itemLayout = R.layout.item_user
+    list = users
+    setOnBindViewHolder { holder, user ->
+        holder.findViewById<Textview>(R.id.name).text = user.name
+        holder.findViewById<Textview>(R.id.age).text = user.age
+        ImageLoader.with(context)
+            .load(user.photo)
+            .into(holder.findViewById<ImageView>(R.id.photo))
+    }
 }
 ```
 
-### Kotlin
-```kotlin
-val adapter = SimpleRecyclerViewAdapter.Builder()
-        .setList(posts())
-        .setItemLayout(R.layout.item_post)
-        .setOnBindViewHolder { holder, `object` -> // bind your data here }
-        .build()
-recyclerView.adapter = adapter
+### Java
+```java
+SimpleRecyclerViewAdapter<DataType> adapter = new SimpleRecyclerViewAdapter<>();
+        adapter.setItemLayout(R.layout.your_item_layot);
+        adapter.setList(yourList);
+        adapter.setOnBindViewHolder(new Function2<SimpleRecyclerViewAdapter.ViewHolder, String, Unit>() {
+            @Override
+            public Unit invoke(SimpleRecyclerViewAdapter.ViewHolder viewHolder, DataType data) {
+                // bind data here
+            }
+        });
+        recyclerView.setAdapter(adapter);
 ```
 
 As you can see, casting is mandatory. Remember that this is a general porpose Adapter, althougth it is returning your own object, the class itself dont know it.
 
 ### Troubleshooting
-Notice that it is crucial to call `build( ... )` so that the listener could be initialized.
-It makes no sense only calling `build( ... )`.
+Naturally the adapter needs an item_layout, an list and an onBindViewHolder() implementation to display the list on screen.
+None of this is optional, so not setting them may lead to runtime app crash.
 ```kotlin
-val adapter = SimpleRecyclerViewAdapter.Builder().build()
-recyclerView.adapter = adapter
+// this is what you need to a void
+recyclerView.adapter = SimpleRecyclerViewAdapter<DataType>()
 ```
-This might lead to app crash.
 
 ### "Build or sinchronization failed!"
-Please reference to the part on the start where i talked about support libraries.
+This is might be a dependency matter. Please reference to the part on the start where i talked about support libraries.
 
 ## Licenses
    Copyright 2018 Horácio Flávio Comé Júnior
@@ -106,6 +104,6 @@ I am open to suggestions of any kind.
 Please be expressive, so others so we'all will be able to understand each other!
 Report any issues, please!
 
-# Simple RecyclerView Utils
+## Simple RecyclerView Utils
 This is part of a serie of libraries that pretend to make recyclerview usage more easy.
 For a touch listener please see [Simple RecyclerView Touch Listener](https://github.com/horaciocome1/simple-recyclerview-touch-listener)

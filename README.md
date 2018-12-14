@@ -62,7 +62,7 @@ recyclerView.adapter = SimpleRecyclerViewAdapter<User>().apply {
 SimpleRecyclerViewAdapter<DataType> adapter = new SimpleRecyclerViewAdapter<>();
         adapter.setItemLayout(R.layout.your_item_layot);
         adapter.setList(yourList);
-        adapter.setOnBindViewHolder(new Function2<SimpleRecyclerViewAdapter.ViewHolder, String, Unit>() {
+        adapter.setOnBindViewHolder(new Function2<SimpleRecyclerViewAdapter.ViewHolder, DataType, Unit>() {
             @Override
             public Unit invoke(SimpleRecyclerViewAdapter.ViewHolder viewHolder, DataType data) {
                 // bind data here
@@ -74,8 +74,8 @@ SimpleRecyclerViewAdapter<DataType> adapter = new SimpleRecyclerViewAdapter<>();
 As you can see, casting is mandatory. Remember that this is a general porpose Adapter, althougth it is returning your own object, the class itself dont know it.
 
 ### Troubleshooting
-Naturally the adapter needs an item_layout, an list and an onBindViewHolder() implementation to display the list on screen.
-None of this is optional, so not setting them may lead to runtime app crash.
+Naturally, the adapter needs an **item_layout**, an **list** and an **onBindViewHolder()** implementation to display the list on screen.
+NONE OF THIS ARE OPTIONAL, so not setting them may lead to runtime app crash.
 ```kotlin
 // this is what you need to a void
 recyclerView.adapter = SimpleRecyclerViewAdapter<DataType>()

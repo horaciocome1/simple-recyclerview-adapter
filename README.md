@@ -74,6 +74,29 @@ SimpleRecyclerViewAdapter<DataType> adapter = new SimpleRecyclerViewAdapter<>();
 No casting need.
 _I suggest you to use Android Studio code completion, to implement **onBindViewHolder()**._
 
+### Adding items to the list
+```kotlin
+adapter.addItem(item)
+```
+
+
+### Update items in the list
+```kotlin
+adapter.setItem(item, position)
+```
+
+### Removing items from the list
+```kotlin
+adapter.removeItem(position)
+```
+
+### Restoring previously removed item to the list
+```kotlin
+adapter.restoreItem(item, position)
+```
+
+Notice that these calls might require public _adapter_ object/variable
+
 ### Troubleshooting
 Naturally, the adapter needs an **item_layout**, an **list** and an **onBindViewHolder()** implementation to display the list on screen.
 NONE OF THIS ARE OPTIONAL, so not setting them may lead to runtime app crash.

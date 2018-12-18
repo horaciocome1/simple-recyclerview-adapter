@@ -22,10 +22,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
+const val NO_ITEM_LAYOUT = -1
+
 class SimpleRecyclerViewAdapter<DataType> : Adapter<SimpleRecyclerViewAdapter.ViewHolder>() {
 
-    var itemLayout: Int = -1
-    var list: List<DataType> = ArrayList()
+    var itemLayout: Int = NO_ITEM_LAYOUT
+    var list = ArrayList<DataType>()
     private var onBind = { _: ViewHolder, _: DataType -> Unit}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,16 +35,30 @@ class SimpleRecyclerViewAdapter<DataType> : Adapter<SimpleRecyclerViewAdapter.Vi
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return list.size
+    override fun getItemCount(): Int { return list.size }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) { onBind(holder, list[position]) }
+
+    fun setOnBindViewHolder(onBind: (SimpleRecyclerViewAdapter.ViewHolder, DataType) -> Unit) { this.onBind = onBind }
+
+    fun addItem(item: DataType) {
+        list.add(item)
+        notifyItemInserted(list.size)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        onBind(holder, list[position])
+    fun setItem(item: DataType, position: Int) {
+        list[position] = item
+        notifyItemChanged(position)
     }
 
-    fun setOnBindViewHolder(onBind: (SimpleRecyclerViewAdapter.ViewHolder, DataType) -> Unit) {
-        this.onBind = onBind
+    fun removeItem(position: Int) {
+        list.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun restoreItem(item: DataType, position: Int) {
+        list.add(position, item)
+        notifyItemInserted(position)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

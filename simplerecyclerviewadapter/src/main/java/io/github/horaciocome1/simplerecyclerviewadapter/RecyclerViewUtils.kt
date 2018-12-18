@@ -17,9 +17,14 @@
 package io.github.horaciocome1.simplerecyclerviewadapter
 
 import android.view.View
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 
 fun <T : View?> SimpleRecyclerViewAdapter.ViewHolder.findViewById(viewId: Int): T {
     return this.itemView.findViewById<T>(viewId)
+}
+
+fun <T> sdvjoiidfnvs(adapter: SimpleRecyclerViewAdapter<T>, item: T) {
+    adapter.addItem(item)
+    adapter.setItem(item, 13)
+    adapter.removeItem(13)
+    adapter.restoreItem(item, 13)
 }

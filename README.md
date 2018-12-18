@@ -1,13 +1,13 @@
 # Simple RecyclerView Adapter 
-[![](https://jitpack.io/v/horaciocome1/simple-recyclerview-adapter.svg)](https://jitpack.io/#horaciocome1/simple-recyclerview-adapter)[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
+[![](https://jitpack.io/v/horaciocome1/simple-recyclerview-adapter.svg)](https://jitpack.io/#horaciocome1/simple-recyclerview-adapter)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
 
 ## Getting Started
 This is a library that abstracts, and completely hide the Adapter and ViewHolder class creation part.
-It is general purpose object that can be costumized to each case (item layout) by the time of creation. Similar to what is done on Listview with default adapters.
+It is general purpose object that can be customized to each case (item layout) by the time of creation. Similar to what is done on Listview with default adapters.
 Compatible with androidx.
 
-## Pre-requesites
-This library can be implemented on any android project with minimun API 14. You must have a list and an item_layout for each item of the list
+## Pre-requisites
+This library can be implemented on any android project with minimum API 14. You must have a list and an item_layout for each item of the list
 
 ## Adding to your project
 Lets start by adding a corresponding repository in your _root_ `build.gradle` file. (prefer below all other)
@@ -19,18 +19,18 @@ Lets start by adding a corresponding repository in your _root_ `build.gradle` fi
 		}
 	}
  ```
-The next task is to add the dependecy to your _app_ `build.gradle` file.
+The next task is to add the dependency to your _app_ `build.gradle` file.
 ```gradle
 	dependencies {
           ...
-	        implementation 'com.github.horaciocome1:simple-recyclerview-adapter:0.1.2'
+	        implementation 'com.github.horaciocome1:simple-recyclerview-adapter:0.1.3'
 	}
 ```
 Now you ready to go. Except that you should _**sync your project**_ first.
 
-### Do not use with app compart or support design
-As mention on IO18, android support libraries will not be updated anymore, thats the main reason ive moved to androidx and new material design libraries. That's why if you have any appcompat or design support library as dependency the build will fail. Because the androidx on these lib will conflict with android support on your app.
-I am wondering if it is necessary to do a separate lib for suppor appcompat. Email me if you thinking on that.
+### Do not use with app compat or support design
+As mention on IO18, android support libraries will not be updated anymore, that's the main reason ive moved to androidx and new material design libraries. That's why if you have any appcompat or design support library as dependency the build will fail. Because the androidx on these lib will conflict with android support on your app.
+I am wondering if it is necessary to do a separate lib for support appcompat. Email me if you thinking on that.
 
 ## How to use
 Call the default constructor passing as Datatype the class of your list objects.
@@ -105,7 +105,7 @@ NONE OF THIS ARE OPTIONAL, so not setting them may lead to runtime app crash.
 recyclerView.adapter = SimpleRecyclerViewAdapter<DataType>()
 ```
 
-### "Build or sinchronization failed!"
+### "Build or synchronization failed!"
 This is might be a dependency matter. Please reference to the part on the start where i talked about support libraries.
 
 ## Licenses
